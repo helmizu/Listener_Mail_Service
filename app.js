@@ -9,13 +9,10 @@ const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost:27017';
 const dbName = 'analytics';
 
-var index = require('./routes/index');
+var index = require('./routes/listener');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 // check db connect
 MongoClient.connect(url, { useNewUrlParser: true }, function(err, client) {
   if (err) throw err;
