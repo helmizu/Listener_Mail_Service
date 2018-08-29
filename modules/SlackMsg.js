@@ -7,7 +7,7 @@ class SlackMsg extends EventEmitter {
         if (!SLACK_WEBHOOK_URL || SLACK_WEBHOOK_URL === "") {
             throw new Error("You need to specify an SLACK_WEBHOOK_URL");
         }
-        this.SLACK_WEBHOOK_URL = options.SLACK_WEBHOOK_URL;
+        this.SLACK_WEBHOOK_URL = SLACK_WEBHOOK_URL;
     }
     
     send(message, cb){
