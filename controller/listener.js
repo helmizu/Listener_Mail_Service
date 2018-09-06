@@ -11,7 +11,7 @@ listener.saveReport = (req, res) => {
       db.close();
       if (err) return res.status(500).json(err);
       if (req.body) { // custom if params to filter just send to slack bounce mail
-        slack.send(req.body, (err, result, body) => {
+        slack.send(JSON.stringify(req.body), (err, result, body) => {
           if (!err) {
             res.status(201).json({
               msg: "data inserted and send to slack"
