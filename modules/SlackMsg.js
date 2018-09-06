@@ -1,4 +1,4 @@
-const EventEmitter = require('eventemitter3')
+const EventEmitter = require('eventemitter3');
 const request = require('request');
 
 class SlackMsg extends EventEmitter {
@@ -9,22 +9,22 @@ class SlackMsg extends EventEmitter {
         }
         this.SLACK_WEBHOOK_URL = SLACK_WEBHOOK_URL;
     }
-    
-    send(message, cb){
+
+    send(message, cb) {
         let slackPayload = {
             text: `* ${message} *`
-        }
-        
+        };
+
         request({
             method: 'POST',
             uri: this.SLACK_WEBHOOK_URL,
             body: slackPayload,
             json: true
         }, (err, res, body) => {
-            if (err) return console.log(`Error posting to Slack: ${err}`)
-            cb()
-        })
-    }    
+            if (err) return cb(err, null, null);
+            cb(null, res, body);
+        });
+    }
 }
 
 module.exports = SlackMsg;
