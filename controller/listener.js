@@ -16,7 +16,7 @@ slack.Init(config.SLACK_WEBHOOK_URL, (err, success) => {
 listener.saveReport = (req, res) => {
   mongo.GetDBObject().collection('report').insertOne(req.body, (err, success) => {
     if (err) return res.status(500).json(err);
-    if (req.body) { // custom if params to filter just send to slack bounce mail
+    if (req.body.eventType == "Bounce" || req.body.eventType == "Complaint" || req.body.eventType == "Reject" || req.body.eventType == "Rendering Failure") { // custom if params to filter just send to slack bounce mail
       slack.Send(JSON.stringify(req.body), (err, result, body) => {
         if (!err) {
           res.status(201).json({
